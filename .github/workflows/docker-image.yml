@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Замість <your-branch-name>
+      - lab_docker
 
 jobs:
   build:
