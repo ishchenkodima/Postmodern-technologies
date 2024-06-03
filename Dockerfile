@@ -1,20 +1,21 @@
-# Використовуйте офіційний образ Node.js.
-FROM node:14
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
 
-# Створіть і змініть робочий каталог на app.
-WORKDIR /usr/src/app
+# Set the working directory in the container
+WORKDIR /app
 
-# Скопіюйте файли залежностей застосунку до контейнерного образу.
-COPY package*.json ./
+# Copy the current directory contents into the container at /app
+ADD . /app
 
-# Встановіть залежності.
-RUN npm install
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Скопіюйте локальний код до контейнерного образу.
-COPY . .
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-# Запустіть веб-сервіс при запуску контейнера.
-CMD [ "node", "app.js" ]
+# Define environment variable
+ENV NAME World
 
-# Документуйте, що сервіс слухає на порту 8080.
-EXPOSE 8080
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+
